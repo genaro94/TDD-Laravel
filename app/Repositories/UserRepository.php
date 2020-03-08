@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-use App\User;
+use App\Models\User;
 
 class UserRepository {
 
@@ -9,8 +9,9 @@ class UserRepository {
         $info = [
             'name'        => $data['name'],
             'password'    => bcrypt($data['password']),
-            'email'       => $data['email']
+            'email'       => $data['email'],
+            'status'      => $data['status']
         ];
-        $create = (new User)->create($info);
+       return (new User)->create($info);
     }
 }
