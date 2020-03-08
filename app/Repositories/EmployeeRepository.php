@@ -12,6 +12,7 @@ class EmployeeRepository {
             'office'         => $data['office'],
             'salary'         => $data['salary']
         ];
-        return (new Employee)->create($info);
+        $employee = (new Employee)->create($info);
+        return (new Employee)->find($employee->id);
     }
 }

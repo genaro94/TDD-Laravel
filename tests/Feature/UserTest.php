@@ -44,4 +44,25 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', ['name' => 'Maria Oliveira Santos']);
         $this->assertDatabaseHas('employees', ['user_id' => $user->id]);
     }
+
+    public function teste_get_profile_employee(){
+        $data = [
+            'name'      => 'Maria Oliveira Santos',
+            'email'     => 'maria@email.com',
+            'password'  => '123456',
+            'status'    => 'employee'
+        ];
+        $user     = (new UserRepository)->create($data);
+
+        $employee_data = [
+            'user_id'  => $user->id,
+            'office'   => 'manager',
+            'salary'   => 2000
+        ];
+
+        $employee = (new EmployeeRepository)->create($employee_data);
+
+        $result   = $user->employee;
+        $this->assertEquals($employee, $result);
+    }
 }
